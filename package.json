@@ -2,7 +2,7 @@
   "name": "monolithium",
   "displayName": "Monolithium",
   "description": "Quickly navigate monorepos with multi-root workspaces. Supports turborepo, lerna, yarn, pnpm, rushjs, and .code-workspace files",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "publisher": "karrettgelley",
   "repository": "https://github.com/karrettgelley/monolithium",
   "license": "SEE LICENSE IN LICENSE",
