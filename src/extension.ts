@@ -17,7 +17,7 @@ interface WorkspaceFolderItem extends QuickPickItem {
 }
 
 function getFolderEmoji(root: string, pkgRoot: string) {
-  const config = vscodeWorkspace.getConfiguration("monorepoWorkspace.folders")
+  const config = vscodeWorkspace.getConfiguration("monolithium.folders")
   if (root == pkgRoot) return config.get<string>("prefix.root") || ""
   const dir = path.relative(root, pkgRoot)
 
@@ -85,7 +85,7 @@ enum PackageAction {
 }
 
 async function updateAll(items?: WorkspaceFolderItem[], clean = false) {
-  const config = vscodeWorkspace.getConfiguration("monorepoWorkspace")
+  const config = vscodeWorkspace.getConfiguration("monolithium")
   if (!items) items = await getPackageFolders(config.get("includeRoot"))
   if (!items) return
   const itemsSet = new Set(items.map((item) => item.root.fsPath))

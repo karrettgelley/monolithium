@@ -1,26 +1,60 @@
 # Monorepo Workspace
 
-Manage monorepos with multi-root workspaces. Supports Lerna, Yarn, Pnpm, Rushjs and recursive package directories.
+Quickly navigate monorepos with multi-root workspaces. Supports npm, turborepo, lerna, yarn, pnpm, rushjs, and .code-workspace files
 
 ## Features
 
-All **Monorepo Workspace** functionality can be found in the command palette. Available commands:
+All **Monolithium** functionality can be found in the command palette. Available commands:
 
 ![Commands](images/animation.gif)
 
-Selecting workspace folders:
-![Select](images/select.png)
+- `Monolithium: Open Package (Current Window)`: open a package from your repository in the current window
+- `Monolithium: Open Package (New Window)`: open a package from your repository in a new window
 
-Selecting one package:
-![Commands](images/list.png)
+## Vscode Workspaces
 
-* `Monorepo: Select Workspace Folders`: select active folders in your workspace, including packages in your repository
-* `Monorepo: Open Package (Current Window)`: open a package from your repository in the current window
-* `Monorepo: Open Package (New Window)`: open a package from your repository in a new window
-* `Monorepo: Open Package (Workspace Folder)`: add a package from your repository as a workspace folder
+Vscode workspaces (.code-workspace) are a useful feature in monorepos. They are especially useful if you need to apply different settings for different packages via `settings.json`. We recommend creating at least one .code-workspace file at the root of your repo to support this workflow:
 
-You can also create workspace folders for all your repository packages with `Monorepo: Sync Workspace Folders`:
-![Commands](images/explorer.png)
+```
+.vscode
+  root.code-workspace
+  settings.json
+packages
+  package1
+    .vscode
+      settings.json
+apps
+  app1
+    .vscode
+      settings.json
+package.json
+```
+
+with the following settings:
+
+```
+{
+  "folders": [
+    {
+      "name": "root",
+      "path": ".."
+    },
+    {
+      "name": "app1",
+      "path": "../apps/app1"
+    },
+    {
+      "name": "package1",
+      "path": "../packages/package1"
+    },
+    ...
+  ]
+}
+```
+
+Doing so will preserve the functionality of package specific `settings.json` files _when working from the root_ (otherwise only root's settings will be used)
+
+Note that while .code-workspace files will be opened (if available), they are not the source of truth for your monorepo structure. The `workspaces` setting in package.json is the source of truth
 
 ## Extension Settings
 
@@ -32,25 +66,11 @@ You can also configure custom types with a prefix in your JSON settings:
 
 ```json
 {
-  "monorepoWorkspace.folders.custom": [
-    {"regex":"app1", "prefix": "🔥"},
-    {"regex":"app2", "prefix": "📚"}
+  "monolithium.folders.custom": [
+    { "regex": "app1", "prefix": "🔥" },
+    { "regex": "app2", "prefix": "📚" }
   ]
 }
 ```
 
-You can find all options under "Monorepo Workspace" in your configurtion.
-
-## Release Notes
-
-### 1.2.0
-
-Added option to configure custom package types
-
-### 1.1.3
-
-Fixed an issue with workspace folders on Windows
-
-### 1.0.0
-
-Initial release :tada:
+You can find all options under "Monolithium" in your configurtion.

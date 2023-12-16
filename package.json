@@ -1,10 +1,10 @@
 {
   "name": "monolithium",
   "displayName": "Monolithium",
-  "description": "Manage monorepos with multi-root workspaces. Supports Lerna, Yarn, Pnpm, Rushjs and recursive package directories",
+  "description": "Quickly navigate monorepos with multi-root workspaces. Supports turborepo, lerna, yarn, pnpm, rushjs, and .code-workspace files",
   "version": "1.4.2",
   "publisher": "karrettgelley",
-  "repository": "http://github.com/karreettgelley/monolithium",
+  "repository": "https://github.com/karrettgelley/monolithium",
   "license": "SEE LICENSE IN LICENSE",
   "engines": {
     "vscode": ">=1.53.0"
@@ -28,15 +28,11 @@
     "commands": [
       {
         "command": "extension.openPackageCurrentWindow",
-        "title": "Monorepo: Open Package (Current Window)"
+        "title": "Monolithium: Open Package (Current Window)"
       },
       {
         "command": "extension.openPackageNewWindow",
-        "title": "Monorepo: Open Package (New Window)"
-      },
-      {
-        "command": "extension.select",
-        "title": "Monorepo: Select Workspace Folders"
+        "title": "Monolithium: Open Package (New Window)"
       }
     ],
     "configuration": {
@@ -84,7 +80,7 @@
         },
         "monolithium.folders.prefix.root": {
           "type": "string",
-          "default": "✨ ",
+          "default": "🏠 ",
           "description": "Folder prefix for the root folder"
         },
         "monolithium.folders.custom": {
