@@ -42,52 +42,52 @@
     "configuration": {
       "title": "Monolithium",
       "properties": {
-        "monorepoWorkspace.includeRoot": {
+        "monolithium.includeRoot": {
           "type": "boolean",
           "default": true,
           "description": "Inlcude the top-level monorepo root path as a workspace folder"
         },
-        "monorepoWorkspace.folders.regex.apps": {
+        "monolithium.folders.regex.apps": {
           "type": "string",
           "default": "^app|web|api|frontend|backend",
           "description": "Regex to match app-like package paths"
         },
-        "monorepoWorkspace.folders.prefix.apps": {
+        "monolithium.folders.prefix.apps": {
           "type": "string",
           "default": "🚀 ",
           "description": "Folder prefix for apps"
         },
-        "monorepoWorkspace.folders.regex.libs": {
+        "monolithium.folders.regex.libs": {
           "type": "string",
           "default": "^common|package|lib|private",
           "description": "Regex to match library-like package paths"
         },
-        "monorepoWorkspace.folders.prefix.libs": {
+        "monolithium.folders.prefix.libs": {
           "type": "string",
           "default": "📦 ",
           "description": "Folder prefix for libraries"
         },
-        "monorepoWorkspace.folders.regex.tools": {
+        "monolithium.folders.regex.tools": {
           "type": "string",
           "default": "^tool|script|util",
           "description": "Regex to match tool-like package paths"
         },
-        "monorepoWorkspace.folders.prefix.tools": {
+        "monolithium.folders.prefix.tools": {
           "type": "string",
           "default": "⚙️ ",
           "description": "Folder prefix for tools"
         },
-        "monorepoWorkspace.folders.prefix.unknown": {
+        "monolithium.folders.prefix.unknown": {
           "type": "string",
           "default": "",
           "description": "Folder prefix for unknown packages"
         },
-        "monorepoWorkspace.folders.prefix.root": {
+        "monolithium.folders.prefix.root": {
           "type": "string",
           "default": "✨ ",
           "description": "Folder prefix for the root folder"
         },
-        "monorepoWorkspace.folders.custom": {
+        "monolithium.folders.custom": {
           "type": "array",
           "default": [],
           "description": "An array of custom 'regex/prefix' pairs like: [{regex:'foo', prefix:'bar'}, {regex:'fffoo', prefix:'bbbar'}]"
