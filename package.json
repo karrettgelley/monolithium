@@ -1,10 +1,10 @@
 {
-  "name": "vscode-monorepo-workspace",
-  "displayName": "Monorepo Workspace",
+  "name": "vscode-monolithium",
+  "displayName": "Monolithium",
   "description": "Manage monorepos with multi-root workspaces. Supports Lerna, Yarn, Pnpm, Rushjs and recursive package directories",
   "version": "1.3.1",
-  "publisher": "folke",
-  "repository": "http://github.com/folke/vscode-monorepo-workspace",
+  "publisher": "karrettgelley",
+  "repository": "http://github.com/karreettgelley/monolithium",
   "license": "SEE LICENSE IN LICENSE",
   "engines": {
     "vscode": ">=1.53.0"
@@ -40,7 +40,7 @@
       }
     ],
     "configuration": {
-      "title": "Monorepo Workspace",
+      "title": "Monolithium",
       "properties": {
         "monorepoWorkspace.includeRoot": {
           "type": "boolean",
