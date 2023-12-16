@@ -84,26 +84,6 @@ enum PackageAction {
   currentWindow,
 }
 
-function addWorkspaceFolder(item: WorkspaceFolderItem) {
-  const folders = vscodeWorkspace.workspaceFolders
-  let start = 0
-  let deleteCount = 0
-  if (folders)
-    for (const folder of folders) {
-      if (folder.uri == item.root) {
-        // Nothing to update
-        if (folder.name == item.label) return
-        deleteCount = 1
-        break
-      }
-      start++
-    }
-  vscodeWorkspace.updateWorkspaceFolders(start, deleteCount, {
-    name: item.label,
-    uri: item.root,
-  })
-}
-
 async function updateAll(items?: WorkspaceFolderItem[], clean = false) {
   const config = vscodeWorkspace.getConfiguration("monorepoWorkspace")
   if (!items) items = await getPackageFolders(config.get("includeRoot"))
@@ -197,9 +177,6 @@ async function openPackage(action: PackageAction) {
           return commands.executeCommand("vscode.openFolder", uri)
         case PackageAction.newWindow:
           return commands.executeCommand("vscode.openFolder", uri, true)
-        case PackageAction.workspaceFolder:
-          addWorkspaceFolder(item)
-          break
       }
     }
   }
