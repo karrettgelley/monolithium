@@ -1,4 +1,4 @@
-// eslint-disable-next-line unicorn/import-style
+import { glob } from "glob"
 import path from "path"
 import { getWorkspace } from "ultra-runner"
 import {
@@ -82,7 +82,6 @@ async function getPackageFolders(
 enum PackageAction {
   newWindow,
   currentWindow,
-  workspaceFolder,
 }
 
 function addWorkspaceFolder(item: WorkspaceFolderItem) {
@@ -154,6 +153,33 @@ async function select(items?: WorkspaceFolderItem[]) {
   if (picked?.length) return updateAll(picked, true)
 }
 
+/**
+ * Attempts to find a .code-workspace file that is associated with {@link packageUri}.
+ * .code-workspace files are expected to be located in the .vscode folder at the
+ * top of the package
+ * @param packageUri uri of an npm workspace (e.g., /path/to/packages/foo)
+ * @returns path to vscode .code-workspace file associated with packageUri
+ */
+function getVscodeWorkspace(packageUri: Uri) {
+  return new Promise((resolve, reject) => {
+    void glob(
+      `${packageUri.path}/.vscode/*.code-workspace`,
+      (err, matches: string[]) => {
+        if (err) {
+          reject(err)
+        }
+
+        if (matches.length === 0) {
+          resolve(false)
+        }
+
+        const vscodeWorkspace = Uri.file(matches[0])
+        resolve(vscodeWorkspace)
+      }
+    )
+  })
+}
+
 async function openPackage(action: PackageAction) {
   const items = await getPackageFolders()
   if (items) {
@@ -161,12 +187,16 @@ async function openPackage(action: PackageAction) {
       canPickMany: false,
       matchOnDescription: true,
     })
+
     if (item) {
+      const vscodeWorkspace = await getVscodeWorkspace(item.root)
+      const uri = vscodeWorkspace || item.root
+
       switch (action) {
         case PackageAction.currentWindow:
-          return commands.executeCommand("vscode.openFolder", item.root)
+          return commands.executeCommand("vscode.openFolder", uri)
         case PackageAction.newWindow:
-          return commands.executeCommand("vscode.openFolder", item.root, true)
+          return commands.executeCommand("vscode.openFolder", uri, true)
         case PackageAction.workspaceFolder:
           addWorkspaceFolder(item)
           break
@@ -184,10 +214,6 @@ export function activate(context: ExtensionContext) {
     commands.registerCommand("extension.openPackageNewWindow", () =>
       openPackage(PackageAction.newWindow)
     ),
-    commands.registerCommand("extension.openPackageWorkspaceFolder", () =>
-      openPackage(PackageAction.workspaceFolder)
-    ),
-    commands.registerCommand("extension.updateAll", () => updateAll()),
     commands.registerCommand("extension.select", () => select())
   )
 }
