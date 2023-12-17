@@ -84,55 +84,6 @@ enum PackageAction {
   currentWindow,
 }
 
-async function updateAll(items?: WorkspaceFolderItem[], clean = false) {
-  const config = vscodeWorkspace.getConfiguration("monolithium")
-  if (!items) items = await getPackageFolders(config.get("includeRoot"))
-  if (!items) return
-  const itemsSet = new Set(items.map((item) => item.root.fsPath))
-  const folders = vscodeWorkspace.workspaceFolders
-  const adds: { name: string; uri: Uri }[] = []
-  if (folders && !clean) {
-    adds.push(...folders.filter((f) => !itemsSet.has(f.uri.fsPath)))
-  }
-  adds.push(
-    ...items.map((item) => ({
-      name: item.label,
-      uri: item.root,
-    }))
-  )
-  vscodeWorkspace.updateWorkspaceFolders(0, folders?.length, ...adds)
-}
-
-async function select(items?: WorkspaceFolderItem[]) {
-  if (!items) items = await getPackageFolders()
-  if (!items) return
-  const itemsSet = new Map(items.map((item) => [item.root.fsPath, item]))
-  const folders = vscodeWorkspace.workspaceFolders
-
-  if (folders) {
-    for (const folder of folders) {
-      if (itemsSet.has(folder.uri.fsPath)) {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        itemsSet.get(folder.uri.fsPath)!.picked = true
-      } else {
-        items.push({
-          root: folder.uri,
-          isRoot: false,
-          label: folder.name,
-          description: "",
-          picked: true,
-        })
-      }
-    }
-  }
-
-  const picked = await window.showQuickPick(items, {
-    canPickMany: true,
-    matchOnDescription: true,
-  })
-  if (picked?.length) return updateAll(picked, true)
-}
-
 /**
  * Attempts to find a .code-workspace file that is associated with {@link packageUri}.
  * .code-workspace files are expected to be located in the .vscode folder at the
@@ -190,8 +141,7 @@ export function activate(context: ExtensionContext) {
     ),
     commands.registerCommand("extension.openPackageNewWindow", () =>
       openPackage(PackageAction.newWindow)
-    ),
-    commands.registerCommand("extension.select", () => select())
+    )
   )
 }
 

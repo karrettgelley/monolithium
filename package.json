@@ -45,7 +45,7 @@
         },
         "monolithium.folders.regex.apps": {
           "type": "string",
-          "default": "^app|web|api|frontend|backend",
+          "default": "^(app|web|api|frontend|backend)",
           "description": "Regex to match app-like package paths"
         },
         "monolithium.folders.prefix.apps": {
@@ -55,7 +55,7 @@
         },
         "monolithium.folders.regex.libs": {
           "type": "string",
-          "default": "^common|package|lib|private",
+          "default": "^(common|package|lib|private)",
           "description": "Regex to match library-like package paths"
         },
         "monolithium.folders.prefix.libs": {
@@ -65,7 +65,7 @@
         },
         "monolithium.folders.regex.tools": {
           "type": "string",
-          "default": "^tool|script|util",
+          "default": "^(tool|script|util)",
           "description": "Regex to match tool-like package paths"
         },
         "monolithium.folders.prefix.tools": {
