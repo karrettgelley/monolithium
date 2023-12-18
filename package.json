@@ -35,18 +35,6 @@
         "title": "Monolithium: Open Package (New Window)"
       }
     ],
-    "keybindings": [
-      {
-        "command": "extension.openPackageCurrentWindow",
-        "key": "ctrl+k shift+ctrl+l",
-        "mac": "cmd+k shift+cmd+l"
-      },
-      {
-        "command": "extension.openPackageNewWindow",
-        "key": "ctrl+k shift+ctrl+m",
-        "mac": "cmd+k shift+cmd+m"
-      }
-    ],
     "configuration": {
       "title": "Monolithium",
       "properties": {

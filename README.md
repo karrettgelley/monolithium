@@ -6,8 +6,8 @@ Quickly navigate monorepos with multi-root workspaces. Supports npm, turborepo, 
 
 All **Monolithium** functionality can be found in the command palette. Available commands:
 
-- `Monolithium: Open Package (Current Window)`: open a package from your repository in the current window. Default shortcut is `cmd+k+cmd+shift+l` on mac or `ctrl+k+shift+ctrl+l` on windows
-- `Monolithium: Open Package (New Window)`: open a package from your repository in a new window. Default shortcut is `cmd+k+cmd+shift+m` on mac or `ctrl+k+shift+ctrl+m` on windows
+- `Monolithium: Open Package (Current Window)`: open a package from your repository in the current window
+- `Monolithium: Open Package (New Window)`: open a package from your repository in a new window
 
 ![Commands](images/animation.gif)
 
